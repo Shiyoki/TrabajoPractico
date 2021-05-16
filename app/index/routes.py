@@ -3,7 +3,7 @@ from .forms import registeroutForm, registerinForm
 from ..models import *
 from .. import db
 from datetime import datetime
-from ..utils import occupied_lot, is_full
+from ..utils import *
 
 index = Blueprint("index", __name__)
 
@@ -67,7 +67,28 @@ def registerout():
     bike_ocuppied = occupied_lot("M")
 
     if form.validate_on_submit():
-        pass
+        vehicle = Vehicle.query.filter_by(
+            license_plate=form.license_plate.data).first_or_404()
+        person = Person.query.filter_by(
+            id_document=form.id_document.data).first_or_404()
+        usage = Usage.query.filter_by(
+            person_id_document=form.id_document.data).all()
+        lot = Lot.query.filter_by(id=vehicle.parking_lot_id).first_or_404()
+
+        usage[len(usage) - 1].out_time = datetime.now()
+        usage[len(usage) - 1].total_charge = total_charge(vehicle.vehicle_type,
+                                                          usage[len(usage) - 1].in_time, usage[len(usage) - 1].out_time)
+        db.session.add(usage[len(usage) - 1])
+        db.session.commit()
+
+        db.session.delete(vehicle)
+        db.session.commit()
+        db.session.delete(lot)
+        db.session.commit()
+
+        flash(
+            f"Eliminación exitosa, ahora la persona debe pagar un total de {usage[len(usage) - 1].total_charge}", "primary")
+        return redirect(url_for("index.home"))
 
     return render_template('registerout.html', form=form,
                            car_occupied=car_occupied, bike_ocuppied=bike_ocuppied)
