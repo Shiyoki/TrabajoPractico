@@ -5,4 +5,8 @@ venv
 .idea
 .vscode
 TrabajoPractico.wpr
+<<<<<<< HEAD
 app/test.db
+=======
+
+>>>>>>> testing
