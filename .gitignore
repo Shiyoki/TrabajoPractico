@@ -4,3 +4,5 @@ Config.py
 venv
 .idea
 .vscode
+TrabajoPractico.wpr
+app/test.db
