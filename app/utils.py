@@ -24,6 +24,10 @@ def total_charge(vehi_type, init_time, out_time):
     else:
         return (initial_charge[vehi_type] * (int(round(hours.seconds / 3600)) * fee_per_hour[vehi_type]))
 
+def time_in(init_time):
+    hours = init_time - datetime.now()
+    return int(round(hours.seconds / 3600))
+
 
 
 

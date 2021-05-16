@@ -42,7 +42,7 @@ def registerin():
 
         vehicle = Vehicle(license_plate=form.license_plate.data,
                           vehicle_type=form.vehicle_type.data,
-                          owner_id=person.id,
+                          owner_id_document=person.id_document,
                           parking_lot_id=lot.id
                           )
         db.session.add(vehicle)
@@ -93,3 +93,9 @@ def registerout():
 
     return render_template('registerout.html', form=form,
                            car_occupied=car_occupied, bike_ocuppied=bike_ocuppied)
+
+
+@index.route("/history/<id>")
+def history(id):
+    usage = Usage.query.filter_by(id_document=id).first_or_404()
+    render_template("home.html", Usage=usage)

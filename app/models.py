@@ -19,7 +19,7 @@ class Person(db.Model):
 class Vehicle(db.Model):
     license_plate = db.Column(db.String(7), primary_key=True)
     vehicle_type = db.Column(db.String(1), nullable=False)
-    owner_id = db.Column(db.Integer, db.ForeignKey('person.id'))
+    owner_id_document = db.Column(db.Integer, db.ForeignKey('person.id_document'))
     parking_lot_id = db.Column(db.Integer, db.ForeignKey('lot.id'))
 
     def __repr__(self):
