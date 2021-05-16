@@ -1,0 +1,35 @@
+{% extends "home.html" %}
+
+{% block content%}
+    <section class="row mt-5">
+        <div class="col-lg-6 offset-3">
+            <form class="card bg-dark border-primary mt-5" action="" method="POST">
+                {{ form.hidden_tag() }}
+                <fieldset class="card-body">
+                    <legend class="card-title fw-bold text-center text-light">Registrar Salida</legend>
+                    <div class="fst-italic text-center text-light">
+                        Puestos de vehiculos ocupados: {{ car_occupied }} de 24
+                    </div>
+                    <div class="fst-italic text-center text-light">
+                        Puestos de motos ocupados: {{ bike_ocuppied }} de 6
+                    </div>
+                    <div class="text-center form-group">
+                        {{ form.license_plate.label(class="form-control-label fst-italic text-light pt-3") }}
+                        {{ form.license_plate(class="form-control mt-2") }}
+                    </div>
+                    <div class="text-center form-group">
+                        {{ form.id_document.label(class="form-control-label fst-italic text-light pt-4") }}
+                        {{ form.id_document(class="form-control mt-2") }}
+                    </div>
+                    <div class="text-center form-group">
+                        {{ form.name.label(class="form-control-label fst-italic text-light pt-4") }}
+                        {{ form.name(class="form-control mt-2") }}
+                    </div>
+                    <div class="text-center">
+                        {{ form.submit(class="btn btn-danger mt-4") }}
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+{% endblock content %}

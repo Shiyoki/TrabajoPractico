@@ -1,0 +1,21 @@
+{% extends "home.html" %}
+
+{% block content%}
+    <section class="row mt-5">
+        <div class="col-lg-6 offset-3">
+            <div class="card bg-dark border-primary mt-5">
+                <h3 class="card-title fw-bold text-light text-center my-2">Elegir una Opcion</h3>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-dark text-light border-primary">
+                        <span class="fst-italic fs-5">Entrada de Vehiculos</span>
+                        <a href="{{ url_for('index.registerin') }}" class="btn btn-danger float-end">Registrar</a>
+                    </li>
+                    <li class="list-group-item bg-dark text-light border-primary">
+                        <span class="fst-italic fs-5">Salida de vehiculos</span>
+                        <a href="{{ url_for('index.registerout') }}" class="btn btn-danger float-end">Registrar</a>
+                    </li>
+                    </ul>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
