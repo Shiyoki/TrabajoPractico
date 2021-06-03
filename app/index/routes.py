@@ -30,6 +30,34 @@ def registerin():
 
             return redirect(url_for("index.registerin"))
 
+        if not is_person_there(form.id_document.data):
+            person = Person.query.filter_by(id_document=form.id_document.data).first_or_404()
+
+            lot = Lot(is_available=False,
+                      lot_type=form.vehicle_type.data)
+            db.session.add(lot)
+            db.session.commit()
+
+            vehicle = None
+            if not is_vehicle_there(form.license_plate.data):
+                vehicle = Vehicle.query.filter_by(license_plate=form.license_plate.data).first_or_404()
+            else:
+                vehicle = Vehicle(license_plate=form.license_plate.data,
+                                  vehicle_type=form.vehicle_type.data,
+                                  owner_id_document=person.id_document,
+                                  parking_lot_id=lot.id)
+                db.session.add(vehicle)
+                db.session.commit()
+
+            usage = Usage(in_time=datetime.now(),
+                          person_id_document=person.id_document)
+            db.session.add(usage)
+            db.session.commit()
+
+            flash("El cliente ha reingresado satisfactoriamente.", 'primary')
+
+            return redirect(url_for("index.home"))
+
         person = Person(name=form.name.data,
                         id_document=form.id_document.data)
         db.session.add(person)
@@ -43,8 +71,7 @@ def registerin():
         vehicle = Vehicle(license_plate=form.license_plate.data,
                           vehicle_type=form.vehicle_type.data,
                           owner_id_document=person.id_document,
-                          parking_lot_id=lot.id
-                          )
+                          parking_lot_id=lot.id)
         db.session.add(vehicle)
         db.session.commit()
 
@@ -97,5 +124,5 @@ def registerout():
 
 @index.route("/history/<id>")
 def history(id):
-    usage = Usage.query.filter_by(id_document=id).first_or_404()
-    render_template("home.html", Usage=usage)
+    usages = Usage.query.filter_by(person_id_document=id).all()
+    return render_template("usage_table.html", usages=usages)

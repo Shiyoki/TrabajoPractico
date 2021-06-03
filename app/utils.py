@@ -24,9 +24,22 @@ def total_charge(vehi_type, init_time, out_time):
     else:
         return (initial_charge[vehi_type] * (int(round(hours.seconds / 3600)) * fee_per_hour[vehi_type]))
 
+
+
 def time_in(init_time):
     hours = init_time - datetime.now()
     return int(round(hours.seconds / 3600))
+
+
+
+def is_person_there(id_document):
+    person = Person.query.filter_by(id_document=id_document).first()
+    return person is None
+
+
+def is_vehicle_there(license_plate):
+    vehicle = Vehicle.query.filter_by(license_plate=license_plate).first()
+    return vehicle is None
 
 
 

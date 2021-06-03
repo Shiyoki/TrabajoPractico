@@ -36,45 +36,7 @@
                         <td>{{ vehicle.vehicle_type }}</td>
                         <td>None</td>
                         <td>
-                            <a href="{{ url_for('index.history', id=vehicle.owner_id_document) }}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Historial</a>
-
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Historial</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Tiempo de entrada</th>
-                                                    <th>Tiempo de salida</th>
-                                                    <th>Cedula de la persona</th>
-                                                    <th>Monto de pago</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for usage in usages %}
-                                                    <tr>
-                                                        <td>{{ usage.id }}</td>
-                                                        <td>{{ usage.in_time }}</td>
-                                                        <td>{{ usage.out_time }}</td>
-                                                        <td>{{ usage.person_id_document }}</td>
-                                                        <td>{{ usage.total_charge }}</td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                            <a href="{{ url_for('index.history', id=vehicle.owner_id_document) }}" class="btn btn-danger">Historial</a>
                         </td>
                     </tr>
                 {% endfor %}
