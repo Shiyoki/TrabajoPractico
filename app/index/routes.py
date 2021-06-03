@@ -12,7 +12,7 @@ index = Blueprint("index", __name__)
 @index.route("/home")
 def home():
     vehicles = db.session.query(Vehicle).all()
-    return render_template('menu.html', vehicles=vehicles)
+    return render_template('menu.html', vehicles=vehicles, time_cheat=datetime.now().replace(microsecond=0).time())
 
 
 @index.route("/registerin", methods=["GET", "POST"])

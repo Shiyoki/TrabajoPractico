@@ -34,7 +34,9 @@
                     <tr>
                         <td><span class="text-uppercase">{{ vehicle.license_plate }}</span></td>
                         <td>{{ vehicle.vehicle_type }}</td>
-                        <td>None</td>
+                        <td>
+                            <time>{{ time_cheat }}</time>
+                        </td>
                         <td>
                             <a href="{{ url_for('index.history', id=vehicle.owner_id_document) }}" class="btn btn-danger">Historial</a>
                         </td>
